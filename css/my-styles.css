@@ -1,0 +1,209 @@
+/* Body */
+body {
+	--contrast: #b30017;	/* Red */
+	--dark: #000000;		/* Black */
+	--light: #ffffff;		/* White */
+	--green: #01ab6a;		/* Green */
+	--highlight: #fbd465;	/* Yellow */
+}
+
+
+.gpt3-progress-circle {
+	display: flex;
+	--progress-value: .3243;
+	--color: hsl(228, 100%, calc(80% - var(--progress-value)*30%));
+}
+.gpt3-loading{
+	display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+}
+.circle-progress {
+	width: 150px;
+	height: 150px;
+}
+
+.circle-progress-value {
+	stroke-width: 6px;
+	stroke: var(--color);
+	stroke-dasharray: 5.98 2;
+	transition: stroke .4s;
+}
+
+.circle-progress-circle {
+	stroke-width: 0px;
+	stroke: hsl(228, 8%, 10%);
+}
+
+.circle-progress-text {
+	font-weight: bold;
+	fill: var(--color);
+	transform: translateX(.2em);
+	transition: fill .4s;
+}
+.popup-container{
+	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.113);
+	justify-content: center;
+    align-items: center;
+	z-index: 9999;
+}
+.res-text{
+	font-size: 1.2rem;
+}
+.gpt3-container{
+	border: 1px solid;
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+.gpt3-icons{
+	height: 30px;
+	cursor: pointer;
+	margin: 0.6rem;
+}
+
+.lds-dual-ring {
+	display: none;
+	width: 80px;
+	height: 80px;
+}
+.lds-dual-ring:after {
+	content: " ";
+	display: block;
+	width: 64px;
+	height: 64px;
+	margin: 8px;
+	border-radius: 50%;
+	border: 6px solid #000000;
+	border-color: #000000 transparent #000000 transparent;
+	animation: lds-dual-ring 1.2s linear infinite;
+}
+.regpt{
+	width: 40px;
+    fill: blue;
+    cursor: pointer;
+}
+.regpt.loading{
+	animation: lds-dual-ring 1.2s linear infinite;	
+}
+@keyframes lds-dual-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/*TREE*/
+.ul-gpt3{
+	list-style: none;
+	padding-left: 15px;
+}
+.gpt3-buttons{
+	position: absolute;
+    top: 50px;
+    left: 0;
+    display: flex;
+	z-index: 9;
+	background: white;
+}
+.gpt3-input{
+	border: none;
+	background-color: rgb(237, 237, 237);
+}
+.treeview__level {
+	padding: 5px;
+	display: flex;
+	align-items: center;
+	border-radius: 5px;
+	font-weight: 700;
+	position: relative;
+}
+
+.treeview__level-btns {
+
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	background-color: #d5e6f6;
+	color: #fff;
+	font-size: 20px;
+}
+.treeview__level-btns {
+	display: inline-flex;
+	position: relative;
+}
+.treeview__level .level-same, .treeview__level .level-sub, .treeview__level .level-remove {
+	/*position: absolute;*/
+	display: none;
+	border: 1px solid;
+	transition: opacity 250ms cubic-bezier(0.7, 0, 0.3, 1);
+}
+.treeview__level .level-same.in, .treeview__level .level-sub.in, .treeview__level .level-remove.in {
+	display: block;
+}
+.treeview__level .level-same.in .btn-default, .treeview__level .level-sub.in .btn-default {
+	background-color: #faeaea;
+	color: #da5555;
+}
+
+
+.treeview__level.selected {
+	background-color: #f9f9fb;
+	box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.10);
+}
+.treeview__level.selected .level-remove {
+	display: inline-block;
+}
+.treeview__level.selected .level-add {
+	display: none;
+}
+.treeview__level.selected .level-same, .treeview__level.selected .level-sub {
+	display: none;
+}
+.treeview .level-title {
+	cursor: pointer;
+	user-select: none;
+}
+.treeview .level-title:hover {
+	text-decoration: underline;
+}
+.treeview--mapview ul {
+	justify-content: center;
+	display: flex;
+}
+.treeview--mapview ul li:before {
+	content: unset;
+}
+.treeview--mapview ul li:after {
+	content: unset;
+}
+.gpt3-input.required{
+	border: 1px solid red!important;
+    box-shadow: 0px 0px 0px 3px #ff000012!important;
+}
+.gpt3-title.required{
+	border: 1px solid red!important;
+    box-shadow: 0px 0px 0px 3px #ff000012!important;
+}
+/*END TREE*/
+
+/* Responsive Styles */
+@media only screen and (max-width: 800px) {
+	
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 500px) {
+	
+}
