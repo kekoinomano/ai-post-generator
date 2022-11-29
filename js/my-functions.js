@@ -113,7 +113,7 @@ function gpt3(){
 		return ;
 	}
 	var title = document.getElementById("title").value;
-	var prompt1 = 'Write a blog with the following title:\n';
+	var prompt1 = 'Write an extensive and detailed blog with the following title:\n';
 	prompt1 += title + '\n';
 	prompt1 += 'TABLE OF CONTENT\n';
 	var all = $(".gpt3-input")
