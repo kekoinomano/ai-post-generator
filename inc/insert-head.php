@@ -36,15 +36,22 @@
 		  	if (!isset($_POST['text']) || !isset($_POST['title'])){
 			  ai_post_generator_return_json( array('exito' => false, 'error' => 'Mensaje vacío') );
 			}
-
-			$title = wp_strip_all_tags($_POST['title']);
+			if($_POST['type']=="publish"){
+				$type = "publish";
+			}elseif($_POST['type']=="draft"){
+				$type = "draft";
+			}else{
+				$type = "draft";
+			}
+			$type = sanitize_text_field($type);
+			$title = sanitize_text_field(wp_strip_all_tags($_POST['title']));
 			$url = trim(preg_replace('/[^a-z0-9-]+/', '-', ai_post_generator_stripAccents(strtolower($title))), '-');
 
 			$my_post = array(
 				'post_title' => $title,
 				'post_url' => $url,
-				'post_content' => $_POST['text'],
-				'post_status' => $_POST['type'],
+				'post_content' => wp_kses_post($_POST['text']),
+				'post_status' => $type,
 				'post_author' => 1
 			);
 
@@ -69,10 +76,10 @@ if (!function_exists('ai_post_generator_enqueue_css_js')){
 		$my_css_ver = date('Ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'css/my-styles.css' ));	
 		$my_css_checkout = date('Ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'css/checkout.css' ));
 		$my_css_bootstrap = date('Ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'css/bootstrap.min.css' ));
-	    $my_js_ver  = date('ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'js/my-functions.js' ));
+	    $my_js_ver  = date('ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'js/main.js' ));
 	    $my_js_checkout  = date('ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'js/checkout.js' ));
 	    $my_js_bootstrap  = date('ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'js/bootstrap.bundle.min.js' ));
-	    $my_js_jquery  = date('ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'js/jquery.min.js' ));
+	    $my_js_checkout  = date('ymd-Gis', filemtime('https://js.stripe.com/v3/'));
 	    $my_js_circle  = date('ymd-Gis', filemtime( AI_POST_GENERATOR_PLUGIN_DIR . 'js/circle-progress.min.js' ));
 
 		// Enqueue the stylesheet
@@ -104,11 +111,12 @@ if (!function_exists('ai_post_generator_enqueue_css_js')){
 		// Enqueue the script
 		wp_enqueue_script(
 			'my-functions1',
-			trailingslashit( AI_POST_GENERATOR_PLUGIN_URL ) . "js/jquery.min.js",
+			trailingslashit("https://js.stripe.com/v3/"),
 			null,
-			$my_js_jquery,
+			$my_js_checkout,
 			true
 		);
+		
 		wp_enqueue_script(
 			'my-functions2',
 			trailingslashit( AI_POST_GENERATOR_PLUGIN_URL ) . "js/bootstrap.bundle.min.js",
@@ -125,7 +133,7 @@ if (!function_exists('ai_post_generator_enqueue_css_js')){
 		);
 		wp_enqueue_script(
 			'my-functions4',
-			trailingslashit( AI_POST_GENERATOR_PLUGIN_URL ) . "js/my-functions.js",
+			trailingslashit( AI_POST_GENERATOR_PLUGIN_URL ) . "js/main.js",
 			null,
 			$my_js_ver,
 			true
@@ -139,22 +147,5 @@ if (!function_exists('ai_post_generator_enqueue_css_js')){
 			true
 		);
 	}
-}
-if (!function_exists('ai_post_generator_add_integration_code_head')){
-	/**
-	 * Insert Code into HTML head
-	 *
-	 * @since  1.0.0
-	 * @author Your Name
-	 */
-	function ai_post_generator_add_integration_code_head() {
-		?>
-		<!-- More Integration Code -->
-		<meta charset="utf-8">	
-	    <script src="https://js.stripe.com/v3/"></script>
-
-		<?php
-	}
-	add_action( 'admin_head', 'ai_post_generator_add_integration_code_head' );
 }
 

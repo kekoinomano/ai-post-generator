@@ -1,8 +1,8 @@
 === AI Post Generator ===
 Contributors: kekotron
-Tags: content, AI, AI content, artificial intelligence, content bot, content writer, article generator
+Tags: content, AI, AI content, artificial intelligence, gpt3, gpt-3, article generator
 Requires at least: 4.7
-Tested up to: 5.9.3
+Tested up to: 9.0
 Requires PHP: 5.6
 Stable tag: 1.0.0
 License: GPLv3
